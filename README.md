@@ -1,5 +1,9 @@
 # musicplayer-ui
 
+[![Build Status](https://travis-ci.org/dsaltares/musicplayer-ui.svg?branch=master)](https://travis-ci.org/dsaltares/musicplayer-ui)
+[![codecov](https://codecov.io/gh/dsaltares/musicplayer-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/dsaltares/musicplayer-ui)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=dsaltares_musicplayer-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=dsaltares_musicplayer-ui)
+
 Frontend for a simple music player app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
