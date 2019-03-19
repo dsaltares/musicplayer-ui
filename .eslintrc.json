@@ -235,6 +235,9 @@
         "react/jsx-filename-extension": [
             "off"
         ],
+        "react/destructuring-assignment": [
+            "off"
+        ],
         "import/no-extraneous-dependencies": [
             "error",
             { "devDependencies": true }
