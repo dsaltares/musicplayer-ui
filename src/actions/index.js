@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-    ADD_TRACKS,
     TRACKS_LOADED,
     FAILED_TO_LOAD,
     SET_GOOGLE_CREDENTIALS
@@ -290,10 +289,6 @@ const StaticTracks = [{
         }
     }
 ]
-
-export function addTracks(payload) {
-    return { type: ADD_TRACKS, payload };
-}
 
 export function getTracks() {
     return function getTracksImpl(dispatch) {

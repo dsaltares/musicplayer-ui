@@ -1,18 +1,19 @@
 import io from 'socket.io-client';
 import Config from '../config';
 import {
-    ADD_TRACKS,
     TRACKS_LOADED,
     SET_GOOGLE_CREDENTIALS
 } from '../constants/action-types';
 
 const initialState = {
-    tracks: [],
+    tracks: {
+        list: [],
+        error: null,
+        loading: true
+    },
     player: {
         trackIndex: -1
     },
-    error: null,
-    loaded: false,
     login: {
         credentials: null,
         socket: io(Config.API_URL)
@@ -20,16 +21,14 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type === ADD_TRACKS) {
-        return {
-            ...state,
-            tracks: [ ...state.tracks, ...action.payload ]
-        };
-    }
     if (action.type === TRACKS_LOADED) {
         return {
             ...state,
-            tracks: action.payload
+            tracks: {
+                list: action.payload,
+                error: null,
+                loaded: true
+            }
         };
     }
     if (action.type === SET_GOOGLE_CREDENTIALS) {

@@ -1,21 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoogleButton from 'react-google-button';
-import { setGoogleCredentials } from './actions/index';
 import Config from './config';
 
-class GoogleSignInBase extends React.Component {
+export default class GoogleSignIn extends React.Component {
     state = {
         popupVisible: false
     };
 
     componentDidMount() {
-        const { socket } = this.props;
+        const { socket, onSignIn } = this.props;
         socket.on('google', (data) => {
             this.popup.close();
-            this.props.setGoogleCredentials(data);
+            onSignIn(data);
         });
+    }
+
+    componentWillUnmount() {
+        if (this.intervalHandle) {
+            clearInterval(this.intervalHandle);
+        }
+        const { socket } = this.props;
+        socket.off('gooogle');
     }
 
     handleGoogleButtonClick() {
@@ -27,10 +34,11 @@ class GoogleSignInBase extends React.Component {
     }
 
     checkPopup() {
-        const check = setInterval(() => {
+        this.intervalHandle = setInterval(() => {
             const { popup } = this;
             if (!popup || popup.closed || popup.closed === undefined) {
-                clearInterval(check);
+                clearInterval(this.intervalHandle);
+                this.intervalHandle = null;
                 this.setState({ popupVisible: false });
             }
         }, 1000);
@@ -66,24 +74,22 @@ class GoogleSignInBase extends React.Component {
     }
 }
 
-GoogleSignInBase.propTypes = {
+GoogleSignIn.propTypes = {
     socket: PropTypes.objectOf(
-        PropTypes.shape({
-            io: PropTypes.any.isRequired
-        })
+        PropTypes.shape({})
     ).isRequired,
-    setGoogleCredentials: PropTypes.func.isRequired
+    onSignIn: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        socket: state.login.socket
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         socket: state.login.socket
+//     };
+// }
 
-const GoogleSignIn = connect(
-    mapStateToProps,
-    { setGoogleCredentials }
-)(GoogleSignInBase);
+// const GoogleSignIn = connect(
+//     mapStateToProps,
+//     null
+// )(GoogleSignInBase);
 
-export default GoogleSignIn;
+// export default GoogleSignIn;

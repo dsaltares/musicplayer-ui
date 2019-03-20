@@ -1,5 +1,4 @@
 
-export const ADD_TRACKS = 'ADD_TRACKS';
 export const TRACKS_LOADED = 'TRACKS_LOADED';
 export const FAILED_TO_LOAD = 'FAILED_TO_LOAD';
 export const SET_GOOGLE_CREDENTIALS = 'SET_GOOGLE_CREDENTIALS';
