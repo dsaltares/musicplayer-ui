@@ -1,81 +1,64 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import GoogleSignIn from './GoogleSignIn';
-import TrackList from './TrackList';
-import { setGoogleCredentials } from './actions';
+import { withStyles } from '@material-ui/core/styles';
 
+import AppContent from './AppContent';
 
-class AppBase extends React.Component {
-    render() {
-        const {
-            accessToken,
-            loading,
-            onGoogleSignIn,
-            socket
-        } = this.props;
-
-        let content = null;
-        if (accessToken && !loading) {
-            content = <TrackList />;
-        } else if (accessToken && loading) {
-            content = <CircularProgress variant="indeterminate" />;
-        } else {
-            content = <GoogleSignIn
-                onSignIn={onGoogleSignIn}
-                socket={socket} />;
-        }
-        return (
-            <div>
-                <AppBar position="static">
-                    <Typography variant="h3" color="inherit">
-                        Music Player
-                    </Typography>
-                </AppBar>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    { content }
-                </Grid>
-            </div>
-        )
+const styles = theme => ({
+    appContainer: {
+        maxWidth: 800,
+        position: 'relative',
+        margin: '0 auto'
+    },
+    appBar: {
+        position: 'relative',
+        padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 4}px`
+    },
+    appContent: {
+        margin: '0 auto',
+        padding: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 6}px`
     }
+});
+
+function AppBase(props) {
+    const { classes } = props;
+
+    return (
+        <div className={classes.appContainer}>
+            <CssBaseline />
+            <AppBar
+                position="static"
+                className={classes.appBar}
+            >
+                <Typography variant="h3" color="inherit">
+                    Music Player
+                </Typography>
+            </AppBar>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={16}
+                className={classes.appContent}
+            >
+                <Grid item>
+                    <AppContent />
+                </Grid>
+            </Grid>
+        </div>
+    );
 }
 
-AppBase.propTypes = {
-    accessToken: PropTypes.string,
-    loading: PropTypes.bool.isRequired,
-    socket: PropTypes.any.isRequired
-};
-
-AppBase.defaultProps = {
-    accessToken: null
-};
-
-function mapStateToProps(state) {
-    return {
-        accessToken: state.login.credentials ? state.login.credentials.accessToken : null,
-        socket: state.login.socket,
-        loading: state.tracks.loading
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onGoogleSignIn: payload => dispatch(setGoogleCredentials(payload))
-    };
-}
-
-const App = connect(
-    mapStateToProps,
-    mapDispatchToProps
+const ConnectedApp = connect(
+    null,
+    null
 )(AppBase);
 
-export default App;
+const App = withStyles(styles)(ConnectedApp);
+
+export default (App);

@@ -9,10 +9,18 @@ export default class GoogleSignIn extends React.Component {
         popupVisible: false
     };
 
+    componentWillMount() {
+        const data = localStorage.getItem('userData');
+        if (data) {
+            this.props.onSignIn(JSON.parse(data));
+        }
+    }
+
     componentDidMount() {
         const { socket, onSignIn } = this.props;
         socket.on('google', (data) => {
             this.popup.close();
+            localStorage.setItem('userData', JSON.stringify(data));
             onSignIn(data);
         });
     }

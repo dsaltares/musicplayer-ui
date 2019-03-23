@@ -1,15 +1,19 @@
 import io from 'socket.io-client';
 import Config from '../config';
 import {
+    SET_GOOGLE_CREDENTIALS,
+    START_LOADING,
     TRACKS_LOADED,
-    SET_GOOGLE_CREDENTIALS
+    SELECT_TRACK,
+    NEXT_TRACK
 } from '../constants/action-types';
 
 const initialState = {
     tracks: {
         list: [],
         error: null,
-        loading: true
+        loading: false,
+        loaded: false
     },
     player: {
         trackIndex: -1
@@ -22,12 +26,16 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     if (action.type === TRACKS_LOADED) {
+        const trackIndex = action.payload.length > 0 ? 0 : -1;
         return {
             ...state,
             tracks: {
                 list: action.payload,
                 error: null,
                 loaded: true
+            },
+            player: {
+                trackIndex
             }
         };
     }
@@ -39,6 +47,38 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             login
+        };
+    }
+    if (action.type === START_LOADING) {
+        return {
+            ...state,
+            tracks: {
+                list: [],
+                error: null,
+                loading: true
+            }
+        };
+    }
+    if (action.type === SELECT_TRACK) {
+        const trackIndex = state.tracks.list.findIndex(
+            track => track.id === action.payload
+        );
+        return {
+            ...state,
+            player: {
+                trackIndex
+            }
+        };
+    }
+    if (action.type === NEXT_TRACK) {
+        const numTracks = state.tracks.list.length;
+        const trackIndex = numTracks > 0 ?
+            (state.player.trackIndex + 1) % numTracks : -1;
+        return {
+            ...state,
+            player: {
+                trackIndex
+            }
         };
     }
 
