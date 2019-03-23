@@ -1,8 +1,7 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoogleButton from 'react-google-button';
-import Config from './config';
+import Config from '../config';
 
 export default class GoogleSignIn extends React.Component {
     state = {

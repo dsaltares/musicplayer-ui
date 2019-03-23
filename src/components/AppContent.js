@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GoogleSignIn from './GoogleSignIn';
 import TrackList from './TrackList';
-import { setGoogleCredentials } from './actions';
+import { setGoogleCredentials } from '../actions/index';
 
 function AppContentBase(props) {
     const {

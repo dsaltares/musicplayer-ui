@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import TrackItem from './TrackItem';
-import { getTracks, selectTrack } from './actions/index';
+import { getTracks, selectTrack } from '../actions/index';
 
 class TrackListBase extends React.Component {
     componentDidMount() {

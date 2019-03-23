@@ -12,7 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import t from 'typy';
 
 import HelpDialog from './HelpDialog';
-import { toggleHelpDialog } from './actions/index';
+import { toggleHelpDialog } from '../actions/index';
 
 const styles = () => ({
     grow: {

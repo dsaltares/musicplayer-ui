@@ -8,7 +8,7 @@ import SkipNext from '@material-ui/icons/SkipNext';
 import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import { withStyles } from '@material-ui/core/styles';
 import t from 'typy';
-import { nextTrack, previousTrack } from './actions/index';
+import { nextTrack, previousTrack } from '../actions/index';
 
 const styles = theme => ({
     appBar: {
