@@ -38,7 +38,7 @@ HelpDialogBase.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        isOpen: state.helpDialogVisible
+        isOpen: state.help.dialogVisible
     };
 }
 
