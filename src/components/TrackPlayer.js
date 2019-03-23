@@ -9,6 +9,7 @@ import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import { withStyles } from '@material-ui/core/styles';
 import t from 'typy';
 import { nextTrack, previousTrack } from '../actions/index';
+import Endpoints from '../constants/endpoints';
 
 const styles = theme => ({
     appBar: {
@@ -92,8 +93,7 @@ class TrackPlayerBase extends React.Component {
 }
 
 function getTrackSrc(id, accessToken) {
-    const urlBase = 'http://localhost:8080/api/track';
-    return encodeURI(`${urlBase}?id=${id}&google_token=${accessToken}`);
+    return encodeURI(`${Endpoints.MUSIC_PLAYER}/api/track?id=${id}&google_token=${accessToken}`);
 }
 
 TrackPlayerBase.propTypes = {
@@ -111,7 +111,7 @@ TrackPlayerBase.defaultProps = {
 
 const mapStateToProps = state => ({
     trackList: state.tracks.list,
-    trackIndex: state.player.trackIndex,
+    trackIndex: state.tracks.trackIndex,
     accessToken: t(state, 'login.credentials.accessToken').safeObject
 });
 

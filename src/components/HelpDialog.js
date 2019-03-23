@@ -23,8 +23,8 @@ function HelpDialogBase(props) {
             <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
                     Log in with your Google account and listen to the tracks in your
-                    Google Drive <pre>musicplayer</pre> folder. Traks should be
-                    named <pre>Artist - Title.mp3</pre>.
+                    Google Drive <code>musicplayer</code> folder. Traks should be
+                    named <code>Artist - Title.mp3</code>.
                 </DialogContentText>
             </DialogContent>
         </Dialog>
@@ -38,7 +38,7 @@ HelpDialogBase.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        isOpen: state.helpDialogVisible
+        isOpen: state.help.dialogVisible
     };
 }
 

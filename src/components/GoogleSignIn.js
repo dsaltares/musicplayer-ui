@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleButton from 'react-google-button';
-import Config from '../config';
+import Endpoints from '../constants/endpoints';
 
 export default class GoogleSignIn extends React.Component {
     state = {
@@ -57,7 +57,7 @@ export default class GoogleSignIn extends React.Component {
         const height = 600;
         const popupLeft = (window.innerWidth / 2) - (width / 2);
         const popupTop = (window.innerHeight / 2) - (height / 2);
-        const url = `${Config.API_URL}/auth/google?socketId=${socket.id}`;
+        const url = `${Endpoints.MUSIC_PLAYER}/auth/google?socketId=${socket.id}`;
 
         return window.open(
             url,

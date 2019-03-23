@@ -31,7 +31,7 @@ TrackListBase.propTypes = {
 
 const mapStateToProps = state => ({
     trackList: state.tracks.list,
-    selectedTrackIndex: state.player.trackIndex,
+    selectedTrackIndex: state.tracks.trackIndex,
     loaded: state.tracks.loaded,
     accessToken: state.login.credentials.accessToken
 });
