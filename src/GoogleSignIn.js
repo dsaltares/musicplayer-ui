@@ -33,7 +33,7 @@ export default class GoogleSignIn extends React.Component {
         socket.off('gooogle');
     }
 
-    handleGoogleButtonClick() {
+    handleGoogleButtonClick = () => {
         if (!this.state.popupVisible) {
             this.popup = this.openPopup();
             this.checkPopup();
@@ -77,7 +77,7 @@ export default class GoogleSignIn extends React.Component {
         }
 
         return (
-            <GoogleButton onClick={this.handleGoogleButtonClick.bind(this)} />
+            <GoogleButton onClick={this.handleGoogleButtonClick} />
         );
     }
 }
@@ -88,16 +88,3 @@ GoogleSignIn.propTypes = {
     ).isRequired,
     onSignIn: PropTypes.func.isRequired
 };
-
-// function mapStateToProps(state) {
-//     return {
-//         socket: state.login.socket
-//     };
-// }
-
-// const GoogleSignIn = connect(
-//     mapStateToProps,
-//     null
-// )(GoogleSignInBase);
-
-// export default GoogleSignIn;

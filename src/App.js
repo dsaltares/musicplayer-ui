@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -58,6 +59,13 @@ function AppBase(props) {
         </MuiThemeProvider>
     );
 }
+
+AppBase.propTypes = {
+    classes: PropTypes.objectOf(PropTypes.shape({
+        appBar: PropTypes.objectOf(PropTypes.shape({})),
+        appContent: PropTypes.objectOf(PropTypes.shape({}))
+    })).isRequired
+};
 
 const ConnectedApp = connect(
     null,
