@@ -1,5 +1,4 @@
 import io from 'socket.io-client';
-import Config from '../config';
 import {
     SET_GOOGLE_CREDENTIALS,
     START_LOADING,
@@ -10,6 +9,7 @@ import {
     TOGGLE_HELP_DIALOG
 } from '../constants/action-types';
 import PlayerStates from '../constants/playerstates';
+import Endpoints from '../constants/endpoints';
 
 const initialState = {
     tracks: {
@@ -21,7 +21,7 @@ const initialState = {
     },
     login: {
         credentials: null,
-        socket: io(Config.API_URL)
+        socket: io(Endpoints.MUSIC_PLAYER)
     },
     helpDialogVisible: false
 };
