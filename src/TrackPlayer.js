@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SkipNext from '@material-ui/icons/SkipNext';
 import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import { withStyles } from '@material-ui/core/styles';
+import t from 'typy';
 import { nextTrack, previousTrack } from './actions/index';
 
 const styles = theme => ({
@@ -27,14 +28,12 @@ class TrackPlayerBase extends React.Component {
     }
 
     componentDidUpdate() {
-        setTimeout(() => {
-            const { current: audio } = this.audioRef;
-            if (audio) {
-                audio.pause();
-                audio.load();
-                audio.play();
-            }
-        }, 200);
+        const { current: audio } = this.audioRef;
+        if (audio) {
+            audio.pause();
+            audio.load();
+            audio.play();
+        }
     }
 
     render() {
@@ -98,18 +97,22 @@ function getTrackSrc(id, accessToken) {
 }
 
 TrackPlayerBase.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.shape({})).isRequired,
+    classes: PropTypes.shape({}).isRequired,
     trackList: PropTypes.arrayOf(PropTypes.object).isRequired,
     trackIndex: PropTypes.number.isRequired,
-    accessToken: PropTypes.string.isRequired,
+    accessToken: PropTypes.string,
     nextTrack: PropTypes.func.isRequired,
     previousTrack: PropTypes.func.isRequired
+};
+
+TrackPlayerBase.defaultProps = {
+    accessToken: undefined
 };
 
 const mapStateToProps = state => ({
     trackList: state.tracks.list,
     trackIndex: state.player.trackIndex,
-    accessToken: state.login.credentials ? state.login.credentials.accessToken : null
+    accessToken: t(state, 'login.credentials.accessToken').safeObject
 });
 
 const mapDispatchToProps = dispatch => ({

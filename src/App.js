@@ -52,10 +52,7 @@ function AppBase(props) {
 }
 
 AppBase.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.shape({
-        appBar: PropTypes.objectOf(PropTypes.shape({})),
-        appContent: PropTypes.objectOf(PropTypes.shape({}))
-    })).isRequired
+    classes: PropTypes.shape({}).isRequired
 };
 
 const ConnectedApp = connect(

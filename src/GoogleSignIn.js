@@ -83,8 +83,6 @@ export default class GoogleSignIn extends React.Component {
 }
 
 GoogleSignIn.propTypes = {
-    socket: PropTypes.objectOf(
-        PropTypes.shape({})
-    ).isRequired,
+    socket: PropTypes.shape({}).isRequired,
     onSignIn: PropTypes.func.isRequired
 };

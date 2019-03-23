@@ -70,9 +70,7 @@ HeaderBase.propTypes = {
     profilePhoto: PropTypes.string,
     userName: PropTypes.string,
     toggleHelpDialog: PropTypes.func.isRequired,
-    classes: PropTypes.objectOf(PropTypes.shape({
-        menuButton: PropTypes.objectOf(PropTypes.shape({}))
-    })).isRequired
+    classes: PropTypes.shape({}).isRequired
 };
 
 HeaderBase.defaultProps = {

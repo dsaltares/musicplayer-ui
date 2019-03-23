@@ -24,7 +24,7 @@ const initialState = {
         credentials: null,
         socket: io(Config.API_URL)
     },
-    sideBarVisible: false
+    helpDialogVisible: false
 };
 
 function rootReducer(state = initialState, action) {
@@ -35,7 +35,8 @@ function rootReducer(state = initialState, action) {
             tracks: {
                 list: action.payload,
                 error: null,
-                loaded: true
+                loaded: true,
+                loading: false
             },
             player: {
                 trackIndex

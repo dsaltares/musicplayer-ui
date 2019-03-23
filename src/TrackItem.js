@@ -6,18 +6,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import MusicNote from '@material-ui/icons/MusicNote';
+import t from 'typy';
 
 function TrackItem(props) {
     const { track, onTrackSelected, selected } = props;
+
     const trackName = track.name || 'Unknown track';
-    const artist = track.artist ?
-        track.artist.name :
-        'Unknown artist';
-    const album = track.album ?
-        track.album.title :
-        'Unknown album';
-    const cover = track.album && track.album.image && track.album.image.length > 0 ?
-        track.album.image[track.album.image.length - 1]['#text'] : '';
+    const artist = t(track, 'artist.name').safeObject || 'Unknown artist';
+    const album = t(track, 'album.title').safeObject || 'Unknown album';
+    const covers = t(track, 'album.image').safeObject || [];
+    const cover = covers.length > 0 ?
+        covers[covers.length - 1]['#text'] : '';
+
     const onClick = selected ?
         () => {} :
         () => {
@@ -41,9 +41,17 @@ function TrackItem(props) {
 }
 
 TrackItem.propTypes = {
-    track: PropTypes.objectOf(PropTypes.shape({
-
-    })).isRequired,
+    track: PropTypes.shape({
+        artist: PropTypes.shape({
+            name: PropTypes.string
+        }),
+        album: PropTypes.shape({
+            title: PropTypes.string,
+            image: PropTypes.arrayOf(PropTypes.shape({
+                '#shape': PropTypes.string
+            }))
+        })
+    }).isRequired,
     selected: PropTypes.bool.isRequired,
     onTrackSelected: PropTypes.func.isRequired
 };
