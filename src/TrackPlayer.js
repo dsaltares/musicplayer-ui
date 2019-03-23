@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { AppBar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import SkipNext from '@material-ui/icons/SkipNext';
 import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import { withStyles } from '@material-ui/core/styles';
-import { nextTrack } from './actions/index';
-import { AppBar } from '@material-ui/core';
+import { nextTrack, previousTrack } from './actions/index';
 
 const styles = theme => ({
     appBar: {
@@ -28,9 +28,11 @@ class TrackPlayerBase extends React.Component {
 
     componentDidUpdate() {
         const { current: audio } = this.audioRef;
-        audio.pause();
-        audio.load();
-        audio.play();
+        if (audio) {
+            audio.pause();
+            audio.load();
+            audio.play();
+        }
     }
 
     render() {
@@ -41,7 +43,7 @@ class TrackPlayerBase extends React.Component {
             classes
         } = this.props;
 
-        if (trackIndex < 0 || trackIndex >= trackList.length) {
+        if (trackIndex < 0 || trackIndex >= trackList.length || !accessToken) {
             return (<div />);
         }
 
@@ -54,22 +56,31 @@ class TrackPlayerBase extends React.Component {
                     direction="row"
                     justify="center"
                     alignItems="center"
-                    spacing={16}
                 >
-                    <IconButton variant="contained" className={classes.button}>
-                        <SkipPrevious fontSize="large" color="inherit" />
+                    <IconButton
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        onClick={this.props.previousTrack}
+                    >
+                        <SkipPrevious fontSize="large" />
                     </IconButton>
                     <audio
                         controls
                         autoPlay
                         ref={this.audioRef}
                         preload="none"
-                        onEnded={(this.props.nextTrack)}
+                        onEnded={this.props.nextTrack}
                     >
                         <source src={src} type="audio/mpeg" />
                         Your browser does not support the audio tag.
                     </audio>
-                    <IconButton variant="contained" className={classes.button}>
+                    <IconButton
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        onClick={this.props.nextTrack}
+                    >
                         <SkipNext fontSize="large" />
                     </IconButton>
                 </Grid>
@@ -84,20 +95,23 @@ function getTrackSrc(id, accessToken) {
 }
 
 TrackPlayerBase.propTypes = {
+    classes: PropTypes.objectOf(PropTypes.shape({})).isRequired,
     trackList: PropTypes.arrayOf(PropTypes.object).isRequired,
     trackIndex: PropTypes.number.isRequired,
     accessToken: PropTypes.string.isRequired,
-    nextTrack: PropTypes.func.isRequired
+    nextTrack: PropTypes.func.isRequired,
+    previousTrack: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     trackList: state.tracks.list,
     trackIndex: state.player.trackIndex,
-    accessToken: state.login.credentials.accessToken
+    accessToken: state.login.credentials ? state.login.credentials.accessToken : null
 });
 
 const mapDispatchToProps = dispatch => ({
-    nextTrack: () => dispatch(nextTrack())
+    nextTrack: () => dispatch(nextTrack()),
+    previousTrack: () => dispatch(previousTrack())
 });
 
 const ConnectedTrackPlayer = connect(

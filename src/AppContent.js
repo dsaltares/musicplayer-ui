@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GoogleSignIn from './GoogleSignIn';
 import TrackList from './TrackList';
-import TrackPlayer from './TrackPlayer';
 import { setGoogleCredentials } from './actions';
 
 function AppContentBase(props) {
@@ -16,7 +15,7 @@ function AppContentBase(props) {
     } = props;
 
     if (loading) {
-        return <CircularProgress variant="indeterminate" />;
+        return <CircularProgress variant="indeterminate" color="primary" />;
     }
 
     if (!accessToken) {
@@ -28,12 +27,7 @@ function AppContentBase(props) {
         );
     }
 
-    return (
-        <div>
-            <TrackList />
-            <TrackPlayer />
-        </div>
-    );
+    return <TrackList />;
 }
 
 AppContentBase.propTypes = {

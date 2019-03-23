@@ -5,7 +5,8 @@ import {
     TRACKS_LOADED,
     FAILED_TO_LOAD,
     SELECT_TRACK,
-    NEXT_TRACK
+    NEXT_TRACK,
+    PREVIOUS_TRACK
 } from '../constants/action-types';
 
 export function getTracks(accessToken) {
@@ -43,4 +44,8 @@ export function selectTrack(payload) {
 
 export function nextTrack() {
     return { type: NEXT_TRACK, payload: null };
+}
+
+export function previousTrack() {
+    return { type: PREVIOUS_TRACK, payload: null };
 }

@@ -1,26 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
+import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 
 import AppContent from './AppContent';
+import TrackPlayer from './TrackPlayer';
+
+const appTheme = createMuiTheme({
+    palette: {
+        secondary: {
+            main: grey[50]
+        }
+    },
+    typography: { useNextVariants: true }
+});
 
 const styles = theme => ({
-    appContainer: {
-        maxWidth: 800,
-        position: 'relative',
-        margin: '0 auto'
-    },
     appBar: {
-        position: 'relative',
+        height: '100px',
+        margin: 'auto',
         padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 4}px`
     },
     appContent: {
-        margin: '0 auto',
-        padding: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 6}px`
+        marginTop: '110px',
+        marginBottom: '100px'
     }
 });
 
@@ -28,13 +34,12 @@ function AppBase(props) {
     const { classes } = props;
 
     return (
-        <div className={classes.appContainer}>
-            <CssBaseline />
+        <MuiThemeProvider theme={appTheme}>
             <AppBar
-                position="static"
+                position="fixed"
                 className={classes.appBar}
             >
-                <Typography variant="h3" color="inherit">
+                <Typography variant="h3" color="secondary">
                     Music Player
                 </Typography>
             </AppBar>
@@ -43,14 +48,14 @@ function AppBase(props) {
                 direction="column"
                 justify="center"
                 alignItems="center"
-                spacing={16}
                 className={classes.appContent}
             >
                 <Grid item>
                     <AppContent />
                 </Grid>
             </Grid>
-        </div>
+            <TrackPlayer />
+        </MuiThemeProvider>
     );
 }
 

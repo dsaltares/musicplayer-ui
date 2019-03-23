@@ -5,7 +5,8 @@ import {
     START_LOADING,
     TRACKS_LOADED,
     SELECT_TRACK,
-    NEXT_TRACK
+    NEXT_TRACK,
+    PREVIOUS_TRACK
 } from '../constants/action-types';
 
 const initialState = {
@@ -78,6 +79,19 @@ function rootReducer(state = initialState, action) {
             ...state,
             player: {
                 trackIndex
+            }
+        };
+    }
+    if (action.type === PREVIOUS_TRACK) {
+        const numTracks = state.tracks.list.length;
+        const trackIndex = state.player.trackIndex - 1;
+        const boundedTrackIndex = trackIndex >= 0 ?
+            trackIndex : numTracks - 1;
+
+        return {
+            ...state,
+            player: {
+                trackIndex: boundedTrackIndex
             }
         };
     }
