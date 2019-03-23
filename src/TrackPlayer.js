@@ -27,12 +27,14 @@ class TrackPlayerBase extends React.Component {
     }
 
     componentDidUpdate() {
-        const { current: audio } = this.audioRef;
-        if (audio) {
-            audio.pause();
-            audio.load();
-            audio.play();
-        }
+        setTimeout(() => {
+            const { current: audio } = this.audioRef;
+            if (audio) {
+                audio.pause();
+                audio.load();
+                audio.play();
+            }
+        }, 200);
     }
 
     render() {
@@ -66,6 +68,7 @@ class TrackPlayerBase extends React.Component {
                         <SkipPrevious fontSize="large" />
                     </IconButton>
                     <audio
+                        crossOrigin="anonymous"
                         controls
                         autoPlay
                         ref={this.audioRef}

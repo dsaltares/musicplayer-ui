@@ -6,7 +6,8 @@ import {
     TRACKS_LOADED,
     SELECT_TRACK,
     NEXT_TRACK,
-    PREVIOUS_TRACK
+    PREVIOUS_TRACK,
+    TOGGLE_HELP_DIALOG
 } from '../constants/action-types';
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     login: {
         credentials: null,
         socket: io(Config.API_URL)
-    }
+    },
+    sideBarVisible: false
 };
 
 function rootReducer(state = initialState, action) {
@@ -93,6 +95,12 @@ function rootReducer(state = initialState, action) {
             player: {
                 trackIndex: boundedTrackIndex
             }
+        };
+    }
+    if (action.type === TOGGLE_HELP_DIALOG) {
+        return {
+            ...state,
+            helpDialogVisible: !state.helpDialogVisible
         };
     }
 

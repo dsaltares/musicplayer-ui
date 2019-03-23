@@ -6,7 +6,8 @@ import {
     FAILED_TO_LOAD,
     SELECT_TRACK,
     NEXT_TRACK,
-    PREVIOUS_TRACK
+    PREVIOUS_TRACK,
+    TOGGLE_HELP_DIALOG
 } from '../constants/action-types';
 
 export function getTracks(accessToken) {
@@ -48,4 +49,8 @@ export function nextTrack() {
 
 export function previousTrack() {
     return { type: PREVIOUS_TRACK, payload: null };
+}
+
+export function toggleHelpDialog() {
+    return { type: TOGGLE_HELP_DIALOG, payload: null };
 }

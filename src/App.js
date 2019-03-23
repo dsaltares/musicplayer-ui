@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import grey from '@material-ui/core/colors/grey';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 
+import Header from './Header';
 import AppContent from './AppContent';
 import TrackPlayer from './TrackPlayer';
 
 const appTheme = createMuiTheme({
     palette: {
+        primary: {
+            main: grey[800]
+        },
         secondary: {
             main: grey[50]
         }
@@ -19,14 +21,9 @@ const appTheme = createMuiTheme({
     typography: { useNextVariants: true }
 });
 
-const styles = theme => ({
-    appBar: {
-        height: '100px',
-        margin: 'auto',
-        padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 4}px`
-    },
+const styles = () => ({
     appContent: {
-        marginTop: '110px',
+        marginTop: '80px',
         marginBottom: '100px'
     }
 });
@@ -36,17 +33,11 @@ function AppBase(props) {
 
     return (
         <MuiThemeProvider theme={appTheme}>
-            <AppBar
-                position="fixed"
-                className={classes.appBar}
-            >
-                <Typography variant="h3" color="secondary">
-                    Music Player
-                </Typography>
-            </AppBar>
+            <Header />
+
             <Grid
                 container
-                direction="column"
+                direction="row"
                 justify="center"
                 alignItems="center"
                 className={classes.appContent}
