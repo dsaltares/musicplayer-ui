@@ -18,6 +18,7 @@ function tracksReducer(state = initialState, action) {
         return {
             ...state,
             list: [],
+            trackIndex: -1,
             state: PlayerStates.LOADING
         };
     }
