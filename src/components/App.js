@@ -32,7 +32,7 @@ const styles = () => ({
     }
 });
 
-function AppBase(props) {
+export function AppBase(props) {
     const { classes } = props;
 
     return (
