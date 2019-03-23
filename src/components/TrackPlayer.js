@@ -32,7 +32,7 @@ class TrackPlayerBase extends React.Component {
         if (audio) {
             audio.pause();
             audio.load();
-            audio.play();
+            audio.play().catch(() => {});
         }
     }
 
@@ -73,6 +73,7 @@ class TrackPlayerBase extends React.Component {
                         ref={this.audioRef}
                         preload="none"
                         onEnded={this.props.nextTrack}
+                        onError={this.props.nextTrack}
                     >
                         <source src={src} type="audio/mpeg" />
                         Your browser does not support the audio tag.
