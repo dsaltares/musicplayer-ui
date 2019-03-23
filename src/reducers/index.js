@@ -14,10 +14,8 @@ import Endpoints from '../constants/endpoints';
 const initialState = {
     tracks: {
         list: [],
+        trackIndex: -1,
         state: PlayerStates.EMPTY
-    },
-    player: {
-        trackIndex: -1
     },
     login: {
         credentials: null,
@@ -33,9 +31,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             tracks: {
                 list: action.payload,
-                state: PlayerStates.LOADED
-            },
-            player: {
+                state: PlayerStates.LOADED,
                 trackIndex
             }
         };
@@ -54,6 +50,7 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             tracks: {
+                ...state.tracks,
                 list: [],
                 state: PlayerStates.LOADING
             }
@@ -65,7 +62,8 @@ function rootReducer(state = initialState, action) {
         );
         return {
             ...state,
-            player: {
+            tracks: {
+                ...state.tracks,
                 trackIndex
             }
         };
@@ -76,7 +74,8 @@ function rootReducer(state = initialState, action) {
             (state.player.trackIndex + 1) % numTracks : -1;
         return {
             ...state,
-            player: {
+            tracks: {
+                ...state.tracks,
                 trackIndex
             }
         };
@@ -89,7 +88,8 @@ function rootReducer(state = initialState, action) {
 
         return {
             ...state,
-            player: {
+            tracks: {
+                ...state.tracks,
                 trackIndex: boundedTrackIndex
             }
         };

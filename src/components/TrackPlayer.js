@@ -111,7 +111,7 @@ TrackPlayerBase.defaultProps = {
 
 const mapStateToProps = state => ({
     trackList: state.tracks.list,
-    trackIndex: state.player.trackIndex,
+    trackIndex: state.tracks.trackIndex,
     accessToken: t(state, 'login.credentials.accessToken').safeObject
 });
 
