@@ -69,7 +69,6 @@ class TrackPlayerBase extends React.Component {
                     <audio
                         crossOrigin="anonymous"
                         controls
-                        autoPlay
                         ref={this.audioRef}
                         preload="none"
                         onEnded={this.props.nextTrack}

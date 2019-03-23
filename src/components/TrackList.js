@@ -3,45 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import TrackItem from './TrackItem';
-import { getTracks, selectTrack } from '../actions/index';
+import { selectTrack } from '../actions/index';
 
-class TrackListBase extends React.Component {
-    componentDidMount() {
-        const {
-            loaded,
-            accessToken
-        } = this.props;
-
-        if (!loaded) {
-            this.props.getTracks(accessToken);
-        }
-    }
-
-    render() {
-        const { trackList, selectedTrackIndex } = this.props;
-        return (
-            <List>
-                {
-                    trackList.map((track, index) => (
-                        <TrackItem
-                            key={track.id}
-                            track={track}
-                            selected={selectedTrackIndex === index}
-                            onTrackSelected={this.props.selectTrack}
-                        />
-                    ))
-                }
-            </List>
-        );
-    }
+function TrackListBase(props) {
+    const { trackList, selectedTrackIndex } = props;
+    return (
+        <List>
+            {
+                trackList.map((track, index) => (
+                    <TrackItem
+                        key={track.id}
+                        track={track}
+                        selected={selectedTrackIndex === index}
+                        onTrackSelected={props.selectTrack}
+                    />
+                ))
+            }
+        </List>
+    );
 }
 
 TrackListBase.propTypes = {
     trackList: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedTrackIndex: PropTypes.number.isRequired,
-    accessToken: PropTypes.string.isRequired,
-    getTracks: PropTypes.func.isRequired,
-    loaded: PropTypes.bool.isRequired,
     selectTrack: PropTypes.func.isRequired
 };
 
@@ -54,10 +38,7 @@ const mapStateToProps = state => ({
 
 const TrackList = connect(
     mapStateToProps,
-    {
-        getTracks,
-        selectTrack
-    }
+    { selectTrack }
 )(TrackListBase);
 
 export default TrackList;

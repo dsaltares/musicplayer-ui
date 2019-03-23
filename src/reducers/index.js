@@ -9,13 +9,12 @@ import {
     PREVIOUS_TRACK,
     TOGGLE_HELP_DIALOG
 } from '../constants/action-types';
+import PlayerStates from '../constants/playerstates';
 
 const initialState = {
     tracks: {
         list: [],
-        error: null,
-        loading: false,
-        loaded: false
+        state: PlayerStates.EMPTY
     },
     player: {
         trackIndex: -1
@@ -34,9 +33,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             tracks: {
                 list: action.payload,
-                error: null,
-                loaded: true,
-                loading: false
+                state: PlayerStates.LOADED
             },
             player: {
                 trackIndex
@@ -58,8 +55,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             tracks: {
                 list: [],
-                error: null,
-                loading: true
+                state: PlayerStates.LOADING
             }
         };
     }

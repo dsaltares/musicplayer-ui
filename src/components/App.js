@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import grey from '@material-ui/core/colors/grey';
-import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
+import {
+    MuiThemeProvider,
+    createMuiTheme,
+    withStyles
+} from '@material-ui/core/styles';
 
 import Header from './Header';
 import AppContent from './AppContent';
