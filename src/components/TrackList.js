@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import TrackItem from './TrackItem';
 import { selectTrack } from '../actions/index';
 
-function TrackListBase(props) {
+export function TrackListBase(props) {
     const { trackList, selectedTrackIndex } = props;
     return (
         <List>
