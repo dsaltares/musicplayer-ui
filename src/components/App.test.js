@@ -1,13 +1,21 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { AppBase } from './App';
+import AppContent from './AppContent';
+import TrackPlayer from './TrackPlayer';
 
-it('renders without crashing', () => {
+Enzyme.configure({ adapter: new Adapter() });
+
+it('renders AppContent and TrackPlayer', () => {
     const props = {
         classes: {
             appContent: {}
         }
     };
-    const renderer = new ShallowRenderer();
-    renderer.render(<AppBase {...props} />);
+
+    const wrapper = shallow(<AppBase {...props} />);
+
+    expect(wrapper.contains(<AppContent />)).toBe(true);
+    expect(wrapper.contains(<TrackPlayer />)).toBe(true);
 });
