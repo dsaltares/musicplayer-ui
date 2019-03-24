@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/dsaltares/musicplayer-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/dsaltares/musicplayer-ui)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=dsaltares_musicplayer-ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=dsaltares_musicplayer-ui)
 
-Frontend for a simple music player app. You will find the backend in [dsaltares/musicplayer-server](https://github.com/dsaltares/musicplayer-server).
+Frontend for a simple music player app. You will find the backend in [dsaltares/musicplayer-server](https://github.com/dsaltares/musicplayer-server). It uses OAuth2 to get tracks in a `musicplayer` folder in your Google Drive account.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
