@@ -39,6 +39,7 @@
     "devDependencies": {
         "eslint-config-airbnb": "^17.1.0",
         "eslint-plugin-react": "^7.12.4",
-        "react-test-renderer": "^16.8.5"
+        "react-test-renderer": "^16.8.5",
+        "redux-mock-store": "^1.5.3"
     }
 }

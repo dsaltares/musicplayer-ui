@@ -9,30 +9,36 @@ import {
     PREVIOUS_TRACK,
     TOGGLE_HELP_DIALOG
 } from '../constants/action-types';
+import Endpoints from '../constants/endpoints';
 
 export function getTracks(accessToken) {
-    return function getTracksImpl(dispatch) {
-        dispatch({
-            type: START_LOADING,
-            payload: null
-        });
+    return (dispatch) => {
+        dispatch(startLoadingTracks());
 
-        return axios.get('http://localhost:8080/api/tracks', {
-            params: {
-                google_token: accessToken
-            }
-        }).then((response) => {
-            dispatch({
-                type: TRACKS_LOADED,
-                payload: response.data.tracks
-            });
-        }).catch((err) => {
-            dispatch({
-                type: FAILED_TO_LOAD,
-                payload: err.msg
-            });
-        });
+        return sendTracksRequest(accessToken)
+            .then(response => dispatch(tracksLoaded(response.data.tracks)))
+            .catch(error => dispatch(failedToLoadTracks(error.message)));
     };
+}
+
+function startLoadingTracks() {
+    return { type: START_LOADING, payload: null };
+}
+
+function sendTracksRequest(accessToken) {
+    return axios.get(`${Endpoints.MUSIC_PLAYER}/api/tracks`, {
+        params: {
+            google_token: accessToken
+        }
+    });
+}
+
+function tracksLoaded(tracks) {
+    return { type: TRACKS_LOADED, payload: tracks };
+}
+
+function failedToLoadTracks(error) {
+    return { type: FAILED_TO_LOAD, payload: error };
 }
 
 export function setGoogleCredentials(payload) {
