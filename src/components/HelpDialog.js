@@ -8,7 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 
 import { toggleHelpDialog } from '../actions/index';
 
-function HelpDialogBase(props) {
+export function HelpDialogBase(props) {
     const { isOpen } = props;
 
     return (

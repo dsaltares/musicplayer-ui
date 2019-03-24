@@ -21,7 +21,7 @@ const styles = theme => ({
     }
 });
 
-class TrackPlayerBase extends React.Component {
+export class TrackPlayerBase extends React.Component {
     constructor(props) {
         super(props);
 

@@ -7,7 +7,7 @@ import TrackList from './TrackList';
 import { getTracks, setGoogleCredentials } from '../actions/index';
 import PlayerStates from '../constants/playerstates';
 
-function AppContentBase(props) {
+export function AppContentBase(props) {
     const {
         accessToken,
         playerState,
