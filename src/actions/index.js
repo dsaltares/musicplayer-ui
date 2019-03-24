@@ -17,7 +17,7 @@ export function getTracks(accessToken) {
 
         return sendTracksRequest(accessToken)
             .then(response => dispatch(tracksLoaded(response.data.tracks)))
-            .catch(error => dispatch(failedToLoadTracks(error.msg)));
+            .catch(error => dispatch(failedToLoadTracks(error.message)));
     };
 }
 
