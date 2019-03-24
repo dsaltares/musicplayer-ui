@@ -45,3 +45,5 @@ npm start
 * Security
    * The client communicates with the server via http and stores Google credentials in local storage. They should be communicating via https and credentials should be stored in a [secured cookie](https://en.wikipedia.org/wiki/Secure_cookie).
    * The server should use [JWT](https://jwt.io/) so that the client can veriry the Google token and trust the server.
+* Quality
+   * `GoogleSignIn` could be made more pure to better manage its state.
