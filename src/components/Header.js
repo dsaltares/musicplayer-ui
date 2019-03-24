@@ -27,7 +27,7 @@ const styles = () => ({
     }
 });
 
-function HeaderBase(props) {
+export function HeaderBase(props) {
     const {
         classes,
         profilePhoto,
